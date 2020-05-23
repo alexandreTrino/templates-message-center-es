@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <!-- So that mobile webkit will display zoomed in -->
+    <meta name="format-detection" content="telephone=no">
+    <!-- disable auto telephone linking in iOS -->
+    <title>{{_accountInfo.TradingName}}</title>
+
+    <style type="text/css">
+        /******************** GLOBAL ********************/
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        table,
+        td,
+        th {
+            font-family: "Helvetica", "Arial", sans-serif;
+            margin: 0;
+            padding: 0;
+            border-spacing: 0;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .wrapper {
+            width: 100%;
+            background-color: #D2D3D5;
+        }
+
+        .content {
+            width: 650px;
+            background-color: #f4f4f4;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .red {
+            color: #036;
+        }
+
+        /******************** HEADER ********************/
+
+        .header {
+            background-color: #ffffff;
+            padding: 0 25px;
+            height: 70px;
+            border-bottom: solid 1px #a7a9ac;
+        }
+
+        .header .text .subject {
+            font-weight: bold;
+            font-size: 13px;
+            color: #fff;
+            line-height: 19px;
+        }
+
+        .header .text .date {
+            font-weight: normal;
+            font-size: 12px;
+            color: #fff;
+            line-height: 19px;
+        }
+
+        /******************** FOOTER ********************/
+
+        .footer td {
+            height: 75px;
+            background-color: #2a2c32;
+            color: #f4f4f4;
+        }
+
+        .footer .prefooter {
+            border-bottom: 1px #bbbdbe;
+        }
+
+        .footer .prefooter span {
+            font-size: 13px;
+            color: #86919b;
+        }
+
+        .footer .prefooter span .red {
+            color: #ed312c;
+        }
+
+        .footer .legal span {
+            font-size: 14px;
+            color: #86919b;
+        }
+
+        /******************** MESSAGE ********************/
+
+        .message>td {
+            padding: 45px 25px;
+            background-color: #fff;
+        }
+
+        .message .icon {
+            width: 90px;
+            border-right: 2px solid #86919b;
+            text-align: center;
+        }
+
+        .message .title {
+            padding-left: 25px;
+            font-size: 20px;
+            line-height: 25px;
+            color: #231f20;
+        }
+
+        .message .subtitle {
+            padding-left: 25px;
+            padding-top: 10px;
+            font-size: 16px;
+            line-height: 22px;
+            color: #80818b;
+        }
+
+        /******************** RESPONSIVE ********************/
+
+        @media only screen and (max-width: 480px) {
+
+            .content {
+                width: 100% !important;
+            }
+
+            .message .subtitle {
+                font-size: 13px !important;
+                line-height: 16px !important;
+            }
+
+        }
+
+
+        /******************** ORDER INFO ********************/
+
+        .order-info-wrapper>td {
+            padding: 0 25px;
+        }
+
+        .order-info>td {
+            padding: 15px 0;
+        }
+
+        .order-info .title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #86919b;
+            line-height: 30px;
+        }
+
+        .order-info .info {
+            font-size: 13px;
+            color: #86919b;
+            line-height: 30px;
+        }
+
+        /* Shipping address */
+        .order-info.shipping>td {
+            border-bottom: 1px #bbbdbe;
+        }
+
+        /* Payment info */
+        .button-red span {
+            padding: 9px 19px;
+            font-size: 17px;
+            color: #fff;
+            background-color: #dc1f26;
+            text-align: center;
+        }
+
+        /* Order summary */
+        .order-info.order-summary>td {
+            background-color: #fff;
+            padding: 0;
+        }
+
+        .order-info.order-summary>td>table>tbody>tr>td,
+        .order-info.order-summary thead th {
+            padding: 20px 15px;
+            border-bottom: 1px #bbbdbe;
+        }
+
+        .order-info.order-summary thead th div {
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 24px;
+            color: #86919b;
+        }
+
+        .order-info.order-summary thead th div.red {
+            font-size: 14px;
+            line-height: 30px;
+            color: #ed312c;
+        }
+
+        .steps .step {
+            width: 25%;
+        }
+
+        .steps .step .icon {
+            text-align: center;
+            width: 30px;
+            padding-right: 10px;
+        }
+
+        .steps .step .icon img {
+            vertical-align: middle;
+        }
+
+        .steps .step .text {
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 16px;
+            color: #a7a9ac;
+        }
+
+        .steps .step.green .text {
+            color: #0ca64b;
+        }
+
+        .steps .step.red .text {
+            color: #dc1f26;
+        }
+
+        .item .info .name {
+            font-size: 15px;
+            line-height: 25px;
+            color: #131418;
+        }
+
+        .item .info .delivery {
+            font-size: 13px;
+            line-height: 22px;
+            color: #86919b;
+        }
+
+        .item .price span {
+            font-size: 15px;
+        }
+
+        .item .price .quantity {
+            color: #131418;
+        }
+
+        .total>td {
+            padding: 15px;
+        }
+
+        .total table td {
+            height: 40px;
+        }
+
+        .total .text {
+            font-weight: bold;
+            font-size: 16px;
+            color: #131418;
+        }
+
+        .total .totalizers td {
+            height: 35px;
+            font-size: 14px;
+        }
+
+        .totalizers .text {
+            font-weight: normal;
+        }
+
+
+        /******************** RESPONSIVE ********************/
+
+        @media only screen and (max-width: 480px) {
+
+            .order-info .info {
+                line-height: 16px !important;
+            }
+
+            .steps .step {
+                width: 50% !important;
+                display: inline-block;
+                padding: 5px 0 !important;
+                text-align: center;
+            }
+
+            .steps .step .icon {
+                display: none !important;
+            }
+
+        }
+    </style>
+</head>
+
+<body style="margin: 0; padding: 0;">
+    <table class="wrapper"
+        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%; background-color: #D2D3D5;">
+        <tr>
+            <td align="center"
+                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0;">
+                <table class="content"
+                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 650px; background-color: #f4f4f4;">
+                    <!-- HEAD -->
+                    <thead>
+                        <tr>
+                            <th class="header"
+                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; border-spacing: 0; padding: 0 25px; height: 70px;">
+                                <table
+                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                    <td align="left" class="logo"
+                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0;">
+                                        <a href="http://www.{{company}}.com.mx/" style="text-decoration: none;">
+                                            <img src="https://{{company}}.vteximg.com.br/arquivos/logo.png" alt="{{company}" style="height: 50px;">
+                                        </a>
+                                    </td>
+                                    <td align="right" class="text"
+                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0;">
+                                        <div class="subject"
+                                            style="font-weight: bold; font-size: 13px; color: #80818b; line-height: 19px;">
+                                            Pedido {{orderId}}</div>
+                                        <div class="date"
+                                            style="font-weight: normal; font-size: 12px; color: #80818b; line-height: 19px;">
+                                            {{formatDate creationDate}}</div>
+                                    </td>
+                                </table>
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- /HEAD -->
+
+                    <!-- CONTENT -->
+                    <tbody>
+
+                        <!-- CUSTOM MESSAGE -->
+                        <tr class="message">
+                            <td
+                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; border-spacing: 0; padding: 45px 25px; background-color: #fff;">
+                                <table
+                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                    <tr>
+                                        <td class="title"
+                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; padding-left: 25px; font-size: 20px; line-height: 25px; color: #231f20;">
+                                            <span>{{clientProfileData.firstName}}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="subtitle"
+                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; padding-left: 25px; padding-top: 10px; font-size: 16px; line-height: 22px; color: #80818b;">
+                                            <span>
+                                                Su pedido ha sido enviado
+                                            </span><br>
+                                            <a style="line-height:19px;margin-bottom:15px;background: #006dcc; color: #fff; display:inline-block; text-decoration: none;padding-top:10px;padding-right:15px;padding-bottom:10px;padding-left:15px;border:1px solid #ccc;border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); border-radius:4px;text-align:center;margin-top:10px"
+                                                    href="{{ordersUrl}}/" class="button">Ir a Mis pedidos</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- /CUSTOM MESSAGE -->
+
+                        <tr class="order-info-wrapper">
+                            <td
+                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; border-spacing: 0; padding: 0 ; border-top: solid 0.5px ;">
+                                <table
+                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+
+                                    <!-- ORDER SUMMARY INFO -->
+                                    <tr class="order-info order-summary">
+                                        <td
+                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; border-spacing: 0; padding: 0; background-color: #fff;">
+                                            <table
+                                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td class="steps"
+                                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; border-spacing: 0; padding: 20px 50px; border-bottom: 1px solid;">
+                                                            <table
+                                                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                                                <tr>
+                                                                    <td class="step green"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 25%;">
+                                                                        <table
+                                                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                                                            <tr>
+                                                                                <td class="icon"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; text-align: center; width: 30px; padding-right: 10px;">
+                                                                                    <img src="http://laeuropeamx.vteximg.com.br/arquivos/ok_icon.png"
+                                                                                        alt="OK"
+                                                                                        style="vertical-align: middle;">
+                                                                                </td>
+                                                                                <td class="text"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; font-weight: bold; font-size: 12px; line-height: 16px; color: #0ca64b;">
+                                                                                    Pedido<br>Confirmado
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td class="step"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 25%;">
+                                                                        <table
+                                                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                                                            <tr>
+                                                                                <td class="icon"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; text-align: center; width: 30px; padding-right: 10px;">
+                                                                                    <img src="http://laeuropeamx.vteximg.com.br/arquivos/ok_icon.png"
+                                                                                        alt="OK"
+                                                                                        style="vertical-align: middle;">
+                                                                                </td>
+                                                                                <td class="text"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; font-weight: bold; font-size: 12px; line-height: 16px; color: #0ca64b;">
+                                                                                    Pago<br>Aprobado
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td class="step"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 25%;">
+                                                                        <table
+                                                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                                                            <tr>
+                                                                                <td class="icon"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; text-align: center; width: 30px; padding-right: 10px;">
+                                                                                    <img src="http://laeuropeamx.vteximg.com.br/arquivos/ok_icon.png"
+                                                                                        alt="OK"
+                                                                                        style="vertical-align: middle;">
+                                                                                </td>
+                                                                                <td class="text"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; font-weight: bold; font-size: 12px; line-height: 16px; color: #0ca64b;">
+                                                                                    Preparando<br>Pedido
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td class="step"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 25%;">
+                                                                        <table
+                                                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                                                            <tr>
+                                                                                <td class="icon"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; text-align: center; width: 30px; padding-right: 10px;">
+                                                                                    <img src="http://laeuropeamx.vteximg.com.br/arquivos/ok_icon.png"
+                                                                                        alt="OK"
+                                                                                        style="vertical-align: middle;">
+                                                                                </td>
+                                                                                <td class="text"
+                                                                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; font-weight: bold; font-size: 12px; line-height: 16px; color: #0ca64b;">
+                                                                                    Pedido<br>Enviado
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+
+                                                    <!-- ITEMS -->
+                                                    <tr>
+                                                        <td class="items-wrapper"
+                                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; border-spacing: 0; padding: 20px 15px; border-bottom: 1px dashed #bbbdbe;">
+                                                            <table
+                                                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                                                {{#each items}}
+                                                                <tr class="item">
+                                                                    <td class="info"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; font-size: 13px; color: #86919b; line-height: 30px;">
+                                                                        <div class="name"
+                                                                            style="font-size: 15px; line-height: 25px; color: #131418;">
+                                                                            {{skuName}}
+                                                                        </div>
+
+                                                                    </td>
+                                                                    <td class="price" align="right"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0;">
+                                                                        <span class="quantity"
+                                                                            style="font-size: 15px; color: #131418;">{{quantity}}x</span>
+                                                                        <span class="red value"
+                                                                            style="color: #2D50AF; font-size: 15px;">${{formatUSDCurrency price}}</span>
+                                                                    </td>
+                                                                </tr>
+                                                                {{/each}}
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <!-- /ITEMS -->
+
+                                                </tbody>
+
+                                                <tfoot>
+                                                    <tr class="total">
+                                                        <td
+                                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; border-spacing: 0; padding: 15px;">
+                                                            <table
+                                                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                                                {{#each totals}}
+                                                                {{#if value}}
+                                                                <tr class="totalizers">
+                                                                    <td class="text"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; font-weight: normal; color: #131418; height: 35px; font-size: 14px;">
+                                                                        {{#eq id "Items"}}
+                                                                        <span>Subtotal</span>
+                                                                        {{/eq}}
+                                                                        {{#eq id "Discounts"}}
+                                                                        <span>Descuento</span>
+                                                                        {{/eq}}
+                                                                        {{#eq id "Shipping"}}
+                                                                        <span>Envio</span>
+                                                                        {{/eq}}
+                                                                        {{#eq id "Tax"}}
+                                                                        <span>Impuesto</span>
+                                                                        {{/eq}}
+                                                                    </td>
+                                                                    <td align="right" class="value red"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; color: #2D50AF; height: 35px; font-size: 14px;">
+                                                                        ${{formatUSDCurrency value}}
+                                                                    </td>
+                                                                </tr>
+                                                                {{/if}}
+                                                                {{/each}}
+                                                                <tr>
+                                                                    <td align="left" class="text"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; height: 40px; font-weight: bold; font-size: 16px; color: #131418;">
+                                                                        <span>
+                                                                            TOTAL
+                                                                        </span>
+                                                                    </td>
+                                                                    <td align="right" class="value red"
+                                                                        style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; color: #2D50AF; height: 40px;">
+                                                                        ${{formatUSDCurrency value}}
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <!-- /ORDER SUMMARY INFO -->
+
+                                </table>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    <!-- /CONTENT -->
+
+                    <!-- FOOTER -->
+                    <tfoot>
+                        <tr>
+                            <td class="footer"
+                                style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0;">
+                                <table
+                                    style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; width: 100%;">
+                                    <tr>
+                                        <td align="center" class="prefooter"
+                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; height: 75px; border-bottom: 1px dashed #bbbdbe;">
+                                            <span style="font-size: 18px; color: #86919b;">{{company}</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" class="legal"
+                                            style="font-family: 'Helvetica', 'Arial', sans-serif; margin: 0; padding: 0; border-spacing: 0; height: 75px;">
+                                            <span style="font-size: 14px; color: #86919b;">© {{year}} Tienda {{company} MX© Todos los derechos reservados. Desarrollado por {{Agency}}.</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </tfoot>
+                    <!-- /FOOTER -->
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
